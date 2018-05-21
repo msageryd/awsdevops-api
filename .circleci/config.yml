@@ -35,26 +35,26 @@ jobs:
           paths:
             - app
 
-    test:
-      <<: *defaults
-      steps:
-        - attach_workspace:
-            at: ~/project
-        - run:
-            name: test
-            command: yarn test
+  test:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: test
+          command: yarn test
 
-    deploy:
-      <<: *defaults
-      steps:
-        - attach_workspace:
-            at: ~/project
-        - setup_remote_docker
-        - run:
-            name: build image and deploy
-            command: |
-              chmod +x deploy.sh
-              ./deploy.sh
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - setup_remote_docker
+      - run:
+          name: build image and deploy
+          command: |
+            chmod +x deploy.sh
+            ./deploy.sh
 
 workflows:
   version: 2
